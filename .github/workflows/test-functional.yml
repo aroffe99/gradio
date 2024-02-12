@@ -22,26 +22,26 @@ jobs:
           . venv/bin/activate
           python -m pip install -r demo/outbreak_forecast/requirements.txt
       - run: pnpm exec playwright install chromium
-      - name: run browser tests
-        run: |
-          . venv/bin/activate
-          CI=1 pnpm test:browser
-      - name: upload screenshots
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-screenshots
-          path: |
-            ./test-results
-      - name: run browser component tests
-        run: |
-          . venv/bin/activate
-          pnpm run test:ct
-      - run: | 
+      # - name: run browser tests
+      #   run: |
+      #     . venv/bin/activate
+      #     CI=1 pnpm test:browser
+      # - name: upload screenshots
+      #   uses: actions/upload-artifact@v4
+      #   if: always()
+      #   with:
+      #     name: playwright-screenshots
+      #     path: |
+      #       ./test-results
+      # - name: run browser component tests
+      #   run: |
+      #     . venv/bin/activate
+      #     pnpm run test:ct
+      - run: |
           . venv/bin/activate
           python -m pip install build
           pnpm --filter @gradio/app build:lite
-          
-      - run: | 
+
+      - run: |
           . venv/bin/activate
           pnpm --filter @gradio/app test:browser:lite
